@@ -33,7 +33,7 @@ MusicControlsInfo * musicControlsSettings;
         MPMediaItemArtwork * mediaItemArtwork = [self createCoverArtwork:[musicControlsInfo cover]];
         NSNumber * duration = [NSNumber numberWithInt:[musicControlsInfo duration]];
         NSNumber * elapsed = [NSNumber numberWithInt:[musicControlsInfo elapsed]];
-        NSNumber * playbackRate = [NSNumber numberWithBool:[musicControlsInfo isPlaying]];
+        NSNumber * playbackRate = [NSNumber numberWithDouble:[musicControlsInfo isPlaying]];
         
         if (mediaItemArtwork != nil) {
             [updatedNowPlayingInfo setObject:mediaItemArtwork forKey:MPMediaItemPropertyArtwork];
@@ -69,7 +69,7 @@ MusicControlsInfo * musicControlsSettings;
     [updatedNowPlayingInfo setObject:playbackRate forKey:MPNowPlayingInfoPropertyPlaybackRate];
     nowPlayingCenter.nowPlayingInfo = updatedNowPlayingInfo;
 
-    if (playbackRate == [NSNumber numberWithInt:1]) {
+    if (playbackRate.doubleValue > 0.0) {
         [[AVAudioSession sharedInstance] setActive:YES error:NULL];
     } else {
         [[AVAudioSession sharedInstance] setActive:NO error:NULL];
