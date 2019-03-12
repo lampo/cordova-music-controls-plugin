@@ -40,6 +40,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MusicControls extends CordovaPlugin {
+	public static MusicControlsNotification sharedNotification;
 	private MusicControlsBroadcastReceiver mMessageReceiver;
 	private MusicControlsNotification notification;
 	private MediaSessionCompat mediaSessionCompat;
@@ -96,6 +97,7 @@ public class MusicControls extends CordovaPlugin {
     		this.cordovaActivity = activity;
 
 		this.notification = new MusicControlsNotification(activity,this.notificationID);
+		MusicControls.sharedNotification = this.notification;
 		this.mMessageReceiver = new MusicControlsBroadcastReceiver(this);
 		this.registerBroadcaster(mMessageReceiver);
 
